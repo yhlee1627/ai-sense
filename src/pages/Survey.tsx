@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useLocalizedQuestions } from '../data/questions'
 import QuestionCard from '../components/QuestionCard'
 import { supabase } from '../supabase/client'
-import { useLanguage } from '../contexts/LanguageContext'
+//import { useLanguage } from '../contexts/LanguageContext'
 
 interface Response {
   selectedOption: 1 | 2 | null

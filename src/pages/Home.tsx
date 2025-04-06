@@ -145,6 +145,15 @@ export default function Home() {
         >
           {t.home.startButton}
         </button>
+
+        {/* 카피라이트 */}
+        <p style={{
+          marginTop: '40px',
+          fontSize: '12px',
+          color: '#999'
+        }}>
+          © Youngho Lee, yhlee@dnue.ac.kr
+        </p>
       </div>
     </div>
   )

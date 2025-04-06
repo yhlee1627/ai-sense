@@ -13,7 +13,7 @@ interface Response {
 export default function Survey() {
   const location = useLocation()
   const navigate = useNavigate()
-  const { t } = useLanguage()
+  //const { t } = useLanguage()
 
   const { gender, age, sessionId } = location.state || {}
 

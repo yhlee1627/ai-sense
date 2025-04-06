@@ -32,16 +32,35 @@ const en = {
     result: {
       title: 'Your Ethical Profile',
       summary: (u: number, d: number) => `Utilitarian: ${u} / Deontological: ${d}`,
-      conclusion: (bias: string) => `👉 You lean toward ${bias}.`,
+      conclusion: (bias: string) => `You lean toward ${bias}.`,
+      hideAltUtil: 'Hide utilitarian perspective',
+      hideAltDeon: 'Hide deontological perspective',
+      readAltUtil: 'Want to see the utilitarian perspective?',
+      readAltDeon: 'Want to see the deontological perspective?',
+      explanation: {
+        util: '"The greatest happiness for the greatest number."\nThis perspective views an action as morally right if it leads to outcomes that maximize happiness for the majority.',
+        deon: '"Treat humanity always as an end, and never merely as a means."\nThis view holds that each individual has absolute moral value and must never be treated as a tool, even for a better outcome.'
+      },
       sectionTitle: 'Response Comparison by Question',
       avgLabel: 'Group Average',
       userLabel: 'Your Response',
+      avgResponseLabel: 'Average',
+      userResponseLabel: 'Your response',
       backHome: 'Return to Home',
-      utilLabel: 'Utilitarian (5)',
-      deonLabel: 'Deontological (5)',
+      utilLabel: 'Utilitarian',
+      deonLabel: 'Deontological',
       avgPosLabel: 'Average Position',
-      userPosLabel: 'Your Position'
+      userPosLabel: 'Your Position',
+      utilDirectionLabel: 'More utilitarian',
+      deonDirectionLabel: 'More deontological',
+      utilShort: 'Utilitarian',
+      deonShort: 'Deontological',
+      pointSuffix: ''
     },
+    loading: {
+      result: 'Loading results...'
+    },
+
     questions: [
       {
         title: 'AI Autonomous Vehicle',

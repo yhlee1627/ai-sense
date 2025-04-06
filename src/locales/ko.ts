@@ -32,16 +32,36 @@ const ko = {
     result: {
       title: '당신의 윤리 성향 결과',
       summary: (u: number, d: number) => `공리주의적 선택: ${u}개 / 의무론적 선택: ${d}개`,
-      conclusion: (bias: string) => `👉 당신은 ${bias} 성향을 보입니다.`,
+      conclusion: (bias: string) => `당신은 ${bias} 성향을 보입니다.`,
+      hideAltUtil: '공리주의적 입장 숨기기',
+      hideAltDeon: '의무론적 입장 숨기기',
+      readAltUtil: '공리주의적 입장이 궁금한가요?',
+      readAltDeon: '의무론적 입장이 궁금한가요?',
+      explanation: {
+        util: '"최대다수의 최대 행복"\n많은 사람의 행복을 극대화하는 결과를 이끌어 낼 수 있는 선택이 올바른 행동이라고 보는 관점입니다.',
+        deon: '"인간을 목적으로 대우하라."\n한 사람의 가치는 절대적인 것으로, 아무리 좋은 결과를 가져올 수 있다 하더라도 인간을 수단으로 대우해서는 안된다는 관점입니다.'
+      },
       sectionTitle: '문항별 응답 비교',
       avgLabel: '전체 평균',
       userLabel: '나의 응답',
+      avgResponseLabel: '평균 응답', // 해석 문장용
+      userResponseLabel: '나의 응답', // 해석 문장용
       backHome: '처음으로 돌아가기',
-      utilLabel: '공리주의 (5점)',
-      deonLabel: '의무론 (5점)',
-      avgPosLabel: '평균 응답 위치',
-      userPosLabel: '나의 응답 위치'
+      utilLabel: '공리주의',
+      deonLabel: '의무론',
+      avgPosLabel: '평균 응답',
+      userPosLabel: '나의 응답',
+      utilDirectionLabel: '공리주의적 성향 강화',
+      deonDirectionLabel: '의무론적 성향 강화',
+      utilShort: '공리주의적',
+      deonShort: '의무론적',
+      pointSuffix: '점',
     },
+
+    loading: {
+      result: '결과 불러오는 중...'
+    },
+
     questions: [
       {
         title: 'AI 자율주행자동차',

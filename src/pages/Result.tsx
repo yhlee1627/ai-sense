@@ -21,6 +21,7 @@ export default function Result() {
   const [userResponses, setUserResponses] = useState<ResponseRow[]>([])
   const [allResponses, setAllResponses] = useState<ResponseRow[]>([])
   const [loading, setLoading] = useState(true)
+  const [showAlt, setShowAlt] = useState(false)
 
   useEffect(() => {
     if (!sessionId) {
@@ -71,56 +72,100 @@ export default function Result() {
     return { utilitarian, deontological }
   }
 
-  const getUserPosition = (
-    score: number,
-    direction: string
-  ): number => {
+  const getUserPosition = (score: number, direction: string): number => {
     return direction === '공리주의' || direction === 'Utilitarian'
       ? (5 - score) * 10
       : 100 - (5 - score) * 10
   }
 
-  const getAveragePosition = (questionId: number): number | null => {
-    const relevant = allResponses.filter((r) => r.question_id === questionId)
-    if (relevant.length === 0) return null
+  const getAverageScoreAndDirection = (questionId: number) => {
+    const filtered = allResponses.filter(res => res.question_id === questionId)
+    if (filtered.length === 0) return null
 
-    const total = relevant.reduce((sum, r) => {
-      const q = questions.find((q) => q.id === r.question_id)
-      if (!q) return sum
-      const dir = r.selected_option === 1 ? q.option1_type : q.option2_type
-      return sum + getUserPosition(r.agreement_score, dir)
-    }, 0)
+    const total = filtered.reduce((sum, res) => sum + res.agreement_score, 0)
+    const avgScore = total / filtered.length
+    const mostDirection = (() => {
+      const counts = { util: 0, deon: 0 }
+      filtered.forEach((res) => {
+        const q = questions.find(q => q.id === res.question_id)
+        const type = res.selected_option === 1 ? q?.option1_type : q?.option2_type
+        if (type === '공리주의' || type === 'Utilitarian') counts.util++
+        else if (type === '의무론' || type === 'Deontological') counts.deon++
+      })
+      return counts.util >= counts.deon ? '공리주의적' : '의무론적'
+    })()
 
-    return total / relevant.length
+    return { avgScore, avgDir: mostDirection }
   }
 
   if (!sessionId) return null
-  if (loading) return <p>결과 불러오는 중...</p>
+  if (loading) return <p>{t.loading.result}</p>
 
   const { utilitarian, deontological } = countByType()
-  const bias =
-    utilitarian > deontological
-      ? t.result.utilLabel
-      : utilitarian < deontological
-      ? t.result.deonLabel
-      : '중립적'
+  const isUtil = utilitarian > deontological
+  const biasLabel = isUtil ? t.result.utilLabel : t.result.deonLabel
+  const mainExplanation = isUtil ? t.result.explanation.util : t.result.explanation.deon
+  const altExplanation = isUtil ? t.result.explanation.deon : t.result.explanation.util
+  const altButtonLabel = showAlt
+    ? isUtil ? t.result.hideAltDeon : t.result.hideAltUtil
+    : isUtil ? t.result.readAltDeon : t.result.readAltUtil
 
   return (
     <div style={{ padding: '40px', maxWidth: '800px', margin: '0 auto', fontFamily: 'sans-serif' }}>
       <h2>{t.result.title}</h2>
       <p style={{ marginBottom: '20px' }}>{t.result.summary(utilitarian, deontological)}</p>
-      <p>{t.result.conclusion(bias)}</p>
+      <p>{t.result.conclusion(biasLabel)}</p>
+
+      <p style={{ whiteSpace: 'pre-line', fontSize: '15px', marginTop: '12px', color: '#444' }}>
+        {mainExplanation}
+      </p>
+
+      <button
+        onClick={() => setShowAlt((prev) => !prev)}
+        style={{
+          marginTop: '16px',
+          fontSize: '14px',
+          background: 'none',
+          border: 'none',
+          color: '#007BFF',
+          cursor: 'pointer',
+          textDecoration: 'underline'
+        }}
+      >
+        {altButtonLabel}
+      </button>
+
+      {showAlt && (
+        <p style={{ whiteSpace: 'pre-line', marginTop: '12px', fontSize: '15px', color: '#666' }}>
+          {altExplanation}
+        </p>
+      )}
 
       <hr style={{ margin: '40px 0' }} />
 
-      {/* 범례 */}
-      <div style={{ display: 'flex', gap: '20px', marginBottom: '30px' }}>
+      {/* ✅ 범례 */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        gap: '20px',
+        marginBottom: '30px'
+      }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <div style={{ width: '12px', height: '12px', backgroundColor: '#4CAF50', borderRadius: '50%' }} />
+          <div style={{
+            width: '12px',
+            height: '12px',
+            backgroundColor: '#4CAF50',
+            borderRadius: '50%'
+          }} />
           <span style={{ fontSize: '14px' }}>{t.result.userLabel}</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <div style={{ width: '12px', height: '12px', backgroundColor: '#2196F3', borderRadius: '50%' }} />
+          <div style={{
+            width: '12px',
+            height: '12px',
+            backgroundColor: '#2196F3',
+            borderRadius: '50%'
+          }} />
           <span style={{ fontSize: '14px' }}>{t.result.avgLabel}</span>
         </div>
       </div>
@@ -131,51 +176,88 @@ export default function Result() {
         const user = userResponses.find((r) => r.question_id === q.id)
         if (!user) return null
 
-        const userDir = user.selected_option === 1 ? q.option1_type : q.option2_type
-        const userPos = getUserPosition(user.agreement_score, userDir)
-        const avgPos = getAveragePosition(q.id)
+        const userType = user.selected_option === 1 ? q.option1_type : q.option2_type
+        const userDir = userType === '공리주의' || userType === 'Utilitarian' ? t.result.utilShort : t.result.deonShort
+        const userPos = getUserPosition(user.agreement_score, userType)
+
+        const avgResult = getAverageScoreAndDirection(q.id)
+        const avgPos = avgResult ? getUserPosition(avgResult.avgScore, avgResult.avgDir) : null
+        const avgDirLabel = avgResult?.avgDir === '공리주의적' ? t.result.utilShort : t.result.deonShort
+
+        const userDirLabel = userDir === t.result.utilShort ? t.result.utilShort : t.result.deonShort
+        const pointSuffix = t.result.pointSuffix || ''
 
         return (
           <div key={q.id} style={{ marginBottom: '40px' }}>
             <p style={{ fontWeight: 'bold' }}>{q.id}. {q.title}</p>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px', marginBottom: '4px' }}>
-              <span>{t.result.utilLabel}</span>
-              <span>{t.result.deonLabel}</span>
+              <span>{t.result.utilLabel.replace(' (5점)', '')}</span>
+              <span>{t.result.deonLabel.replace(' (5점)', '')}</span>
             </div>
 
             <div style={{ position: 'relative', height: '20px', background: '#eee', borderRadius: '10px' }}>
+              <div style={{
+                position: 'absolute',
+                left: '50%',
+                top: 0,
+                width: '1px',
+                height: '100%',
+                backgroundColor: '#bbb',
+                zIndex: 0
+              }} />
               {avgPos !== null && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    left: `${avgPos}%`,
-                    top: 0,
-                    transform: 'translateX(-50%)',
-                    backgroundColor: '#2196F3',
-                    width: '8px',
-                    height: '100%',
-                    borderRadius: '4px'
-                  }}
-                />
-              )}
-              <div
-                style={{
+                <div style={{
                   position: 'absolute',
-                  left: `${userPos}%`,
+                  left: `${avgPos}%`,
                   top: 0,
                   transform: 'translateX(-50%)',
-                  backgroundColor: '#4CAF50',
+                  backgroundColor: '#2196F3',
                   width: '8px',
                   height: '100%',
                   borderRadius: '4px'
-                }}
-              />
+                }} />
+              )}
+              <div style={{
+                position: 'absolute',
+                left: `${userPos}%`,
+                top: 0,
+                transform: 'translateX(-50%)',
+                backgroundColor: '#4CAF50',
+                width: '8px',
+                height: '100%',
+                borderRadius: '4px'
+              }} />
             </div>
 
-            <div style={{ fontSize: '14px', marginTop: '6px' }}>
-              {t.result.avgPosLabel}: <strong>{avgPos?.toFixed(1) ?? '-'}</strong>% / {t.result.userPosLabel}: <strong>{userPos.toFixed(1)}%</strong>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              fontSize: '13px',
+              color: '#888',
+              marginTop: '4px',
+              fontStyle: 'italic'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <span style={{ fontSize: '16px' }}>←</span>
+                <span>{t.result.utilDirectionLabel}</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <span>{t.result.deonDirectionLabel}</span>
+                <span style={{ fontSize: '16px' }}>→</span>
+              </div>
             </div>
+
+            <p style={{
+              fontSize: '14px',
+              marginTop: '10px',
+              textAlign: 'center',
+              color: '#333'
+            }}>
+              {t.result.avgResponseLabel}: <strong>{avgDirLabel} ({avgResult?.avgScore.toFixed(1)}{pointSuffix})</strong> / 
+              {t.result.userResponseLabel}: <strong>{userDirLabel} ({user.agreement_score}{pointSuffix})</strong>
+            </p>
           </div>
         )
       })}
@@ -191,8 +273,6 @@ export default function Result() {
             cursor: 'pointer',
             fontSize: '16px'
           }}
-          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#e0e0e0')}
-          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#f2f2f2')}
         >
           {t.result.backHome}
         </button>

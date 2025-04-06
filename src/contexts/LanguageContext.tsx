@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useMemo } from 'react'
+import { createContext, useContext, useMemo, useState } from 'react'
 import { languages } from '../i18n'
 import type { Language } from '../i18n'
 
@@ -8,6 +8,7 @@ interface LanguageContextProps {
   t: typeof languages.ko
 }
 
+// 초기값
 export const LanguageContext = createContext<LanguageContextProps>({
   lang: 'ko',
   setLang: () => {},
@@ -17,11 +18,12 @@ export const LanguageContext = createContext<LanguageContextProps>({
 export const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
   const [lang, setLangState] = useState<Language>('ko')
 
-  const t = useMemo(() => languages[lang], [lang])
-
   const setLang = (newLang: Language) => {
     setLangState(newLang)
   }
+
+  // 💡 타입 명시로 TypeScript 자동완성 지원
+  const t = useMemo(() => languages[lang], [lang]) as typeof languages.ko
 
   return (
     <LanguageContext.Provider value={{ lang, setLang, t }}>

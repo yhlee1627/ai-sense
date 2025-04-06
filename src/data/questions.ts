@@ -1,0 +1,30 @@
+import { useLanguage } from '../contexts/LanguageContext'
+
+export interface Question {
+  id: number
+  title: string
+  description: string
+  image1: string
+  image2: string
+  option1: string
+  option2: string
+  option1_type: '공리주의' | '의무론' | 'Utilitarian' | 'Deontological'
+  option2_type: '공리주의' | '의무론' | 'Utilitarian' | 'Deontological'
+}
+
+// ✅ 이 훅을 통해 언어에 맞는 questions를 불러오는 함수
+export const useLocalizedQuestions = (): Question[] => {
+  const { t } = useLanguage()
+
+  return t.questions.map((q, index) => ({
+    id: index + 1,
+    title: q.title,
+    description: q.description,
+    option1: q.option1,
+    option2: q.option2,
+    option1_type: q.option1_type,
+    option2_type: q.option2_type,
+    image1: `/images/${index + 1}-1.jpg`,
+    image2: `/images/${index + 1}-2.jpg`
+  }))
+}

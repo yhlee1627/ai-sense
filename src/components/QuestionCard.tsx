@@ -50,41 +50,73 @@ export default function QuestionCard({
   }
 
   return (
-    <div style={{ textAlign: 'center', padding: '40px', maxWidth: '800px', margin: '0 auto' }}>
+    <div
+      style={{
+        textAlign: 'center',
+        padding: '40px 20px',
+        maxWidth: '800px',
+        margin: '0 auto',
+        boxSizing: 'border-box'
+      }}
+    >
       <h2>{questionIndex + 1}. {question.title}</h2>
-      <p style={{ fontSize: '18px', marginBottom: '30px' }}>{question.description}</p>
+      <p style={{ fontSize: '18px', marginBottom: '30px', whiteSpace: 'pre-line' }}>
+        {question.description}
+      </p>
 
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', margin: '20px 0' }}>
-        <div onClick={() => setSelectedOption(1)} style={{ cursor: 'pointer' }}>
-          <img
-            src={question.image1}
-            alt="선택 1"
-            width={300}
+      {/* ✅ 반응형 이미지 선택 영역 */}
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: '16px',
+          margin: '20px 0'
+        }}
+      >
+        {[1, 2].map((opt) => (
+          <div
+            key={opt}
+            onClick={() => setSelectedOption(opt as 1 | 2)}
             style={{
-              border: selectedOption === 1 ? '4px solid #4CAF50' : '2px solid #ccc',
-              borderRadius: '8px'
+              cursor: 'pointer',
+              width: '100%',
+              maxWidth: '300px'
             }}
-          />
-          <p style={{ marginTop: '10px' }}>{question.option1}</p>
-        </div>
-        <div onClick={() => setSelectedOption(2)} style={{ cursor: 'pointer' }}>
-          <img
-            src={question.image2}
-            alt="선택 2"
-            width={300}
-            style={{
-              border: selectedOption === 2 ? '4px solid #4CAF50' : '2px solid #ccc',
-              borderRadius: '8px'
-            }}
-          />
-          <p style={{ marginTop: '10px' }}>{question.option2}</p>
-        </div>
+          >
+            <img
+              src={opt === 1 ? question.image1 : question.image2}
+              alt={`선택 ${opt}`}
+              style={{
+                width: '100%',
+                height: 'auto',
+                border: selectedOption === opt ? '4px solid #4CAF50' : '2px solid #ccc',
+                borderRadius: '8px'
+              }}
+            />
+            <p style={{ marginTop: '10px', fontSize: '14px' }}>
+              {opt === 1 ? question.option1 : question.option2}
+            </p>
+          </div>
+        ))}
       </div>
 
+      {/* 동의 척도 */}
       {selectedOption !== null && (
         <div style={{ marginTop: '30px' }}>
-          <p style={{ fontWeight: 'bold', fontSize: '16px' }}>{t.survey.agreePrompt}</p>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginTop: '15px' }}>
+          <p style={{ fontWeight: 'bold', fontSize: '16px' }}>
+            {t.survey.agreePrompt}
+          </p>
+
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '12px',
+              flexWrap: 'wrap',
+              marginTop: '15px'
+            }}
+          >
             {[1, 2, 3, 4, 5].map((value) => (
               <button
                 key={value}
@@ -103,9 +135,11 @@ export default function QuestionCard({
               </button>
             ))}
           </div>
+
           <div style={{ marginTop: '15px', fontSize: '15px', fontWeight: 'bold' }}>
             {scaleLabels[agreementScore - 1]}
           </div>
+
           <div style={{
             display: 'flex',
             justifyContent: 'space-between',
@@ -120,6 +154,7 @@ export default function QuestionCard({
         </div>
       )}
 
+      {/* 이전/다음 버튼 */}
       <div style={{ marginTop: '40px', display: 'flex', justifyContent: 'space-between' }}>
         <button
           disabled={questionIndex === 0}

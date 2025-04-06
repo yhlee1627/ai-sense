@@ -5,7 +5,12 @@ const ko = {
       startButton: '설문 시작하기',
       genderLabel: '성별',
       ageLabel: '나이',
-      languageLabel: '언어 선택'
+      languageLabel: '언어 선택',
+      alertIncomplete: '성별과 나이를 입력해주세요.',
+      genderOptions: {
+        male: '남',
+        female: '여'
+      }
     },
     survey: {
       agreePrompt: '이 선택에 어느 정도 동의하시나요?',

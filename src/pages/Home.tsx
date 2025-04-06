@@ -3,15 +3,17 @@ import { useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import { useLanguage } from '../contexts/LanguageContext'
 
+type GenderCode = 'male' | 'female'
+
 export default function Home() {
   const navigate = useNavigate()
-  const [gender, setGender] = useState<'남' | '여' | ''>('')
+  const [gender, setGender] = useState<GenderCode | ''>('')
   const [age, setAge] = useState<number | ''>('')
   const { lang, setLang, t } = useLanguage()
 
   const handleStart = () => {
     if (!gender || age === '') {
-      alert('성별과 나이를 입력해주세요.')
+      alert(t.home.alertIncomplete)
       return
     }
 
@@ -81,7 +83,7 @@ export default function Home() {
 
         {/* 성별 선택 */}
         <div style={{ display: 'flex', gap: '20px', marginBottom: '30px' }}>
-          {['남', '여'].map((g) => (
+          {(['male', 'female'] as GenderCode[]).map((g) => (
             <label
               key={g}
               style={{
@@ -98,10 +100,10 @@ export default function Home() {
                 name="gender"
                 value={g}
                 checked={gender === g}
-                onChange={() => setGender(g as '남' | '여')}
+                onChange={() => setGender(g)}
                 style={{ display: 'none' }}
               />
-              {g}
+              {t.home.genderOptions[g]}
             </label>
           ))}
         </div>

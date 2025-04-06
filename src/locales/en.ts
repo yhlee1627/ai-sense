@@ -5,7 +5,12 @@ const en = {
       startButton: 'Start Survey',
       genderLabel: 'Gender',
       ageLabel: 'Age',
-      languageLabel: 'Select Language'
+      languageLabel: 'Select Language',
+      alertIncomplete: 'Please enter your gender and age.',
+      genderOptions: {
+        male: 'Male',
+        female: 'Female'
+      }
     },
     survey: {
       agreePrompt: 'How strongly do you agree with this choice?',

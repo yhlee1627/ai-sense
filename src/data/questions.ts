@@ -12,7 +12,7 @@ export interface Question {
   option2_type: '공리주의' | '의무론' | 'Utilitarian' | 'Deontological'
 }
 
-// ✅ 이 훅을 통해 언어에 맞는 questions를 불러오는 함수
+// ✅ 언어에 맞는 questions를 불러오는 훅
 export const useLocalizedQuestions = (): Question[] => {
   const { t } = useLanguage()
 
@@ -22,8 +22,8 @@ export const useLocalizedQuestions = (): Question[] => {
     description: q.description,
     option1: q.option1,
     option2: q.option2,
-    option1_type: q.option1_type,
-    option2_type: q.option2_type,
+    option1_type: q.option1_type as Question['option1_type'], // ✅ 타입 단언
+    option2_type: q.option2_type as Question['option2_type'], // ✅ 타입 단언
     image1: `/images/${index + 1}-1.jpg`,
     image2: `/images/${index + 1}-2.jpg`
   }))

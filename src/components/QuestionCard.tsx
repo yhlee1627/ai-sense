@@ -9,6 +9,8 @@ interface Question {
   image2: string
   option1: string
   option2: string
+  detail1?: string
+  detail2?: string
 }
 
 interface Props {
@@ -33,12 +35,16 @@ export default function QuestionCard({
 }: Props) {
   const [selectedOption, setSelectedOption] = useState<null | 1 | 2>(null)
   const [agreementScore, setAgreementScore] = useState(5)
+  const [showDetail1, setShowDetail1] = useState(false)
+  const [showDetail2, setShowDetail2] = useState(false)
   const { t } = useLanguage()
   const scaleLabels = t.survey.scaleLabels
 
   useEffect(() => {
     setSelectedOption(savedResponse.selectedOption)
     setAgreementScore(savedResponse.agreementScore)
+    setShowDetail1(false)
+    setShowDetail2(false)
   }, [question.id])
 
   const handleNextClick = () => {
@@ -64,7 +70,7 @@ export default function QuestionCard({
         {question.description}
       </p>
 
-      {/* ✅ 반응형 이미지 선택 영역 */}
+      {/* ✅ 이미지 선택 영역 */}
       <div
         style={{
           display: 'flex',
@@ -74,39 +80,71 @@ export default function QuestionCard({
           margin: '20px 0'
         }}
       >
-        {[1, 2].map((opt) => (
-          <div
-            key={opt}
-            onClick={() => setSelectedOption(opt as 1 | 2)}
-            style={{
-              cursor: 'pointer',
-              width: '100%',
-              maxWidth: '300px'
-            }}
-          >
-            <img
-              src={opt === 1 ? question.image1 : question.image2}
-              alt={`선택 ${opt}`}
+        {[1, 2].map((opt) => {
+          const selected = selectedOption === opt
+          const showDetail = opt === 1 ? showDetail1 : showDetail2
+          const toggleDetail = opt === 1 ? () => setShowDetail1(!showDetail1) : () => setShowDetail2(!showDetail2)
+          const detailText = opt === 1 ? question.detail1 : question.detail2
+          const img = opt === 1 ? question.image1 : question.image2
+          const label = opt === 1 ? question.option1 : question.option2
+
+          return (
+            <div
+              key={opt}
+              onClick={() => setSelectedOption(opt as 1 | 2)}
               style={{
+                cursor: 'pointer',
                 width: '100%',
-                height: 'auto',
-                border: selectedOption === opt ? '4px solid #4CAF50' : '2px solid #ccc',
-                borderRadius: '8px'
+                maxWidth: '300px'
               }}
-            />
-            <p style={{ marginTop: '10px', fontSize: '14px' }}>
-              {opt === 1 ? question.option1 : question.option2}
-            </p>
-          </div>
-        ))}
+            >
+              <img
+                src={img}
+                alt={`선택 ${opt}`}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  border: selected ? '4px solid #4CAF50' : '2px solid #ccc',
+                  borderRadius: '8px'
+                }}
+              />
+              <p style={{ marginTop: '10px', fontSize: '14px' }}>{label}</p>
+
+              {/* 자세히 알아보기 버튼 */}
+              {detailText && (
+                <div style={{ marginTop: '8px' }}>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      toggleDetail()
+                    }}
+                    style={{
+                      fontSize: '13px',
+                      color: '#007BFF',
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      textDecoration: 'underline'
+                    }}
+                  >
+                    {showDetail ? t.survey.readLess : t.survey.readMore}
+                  </button>
+                  {showDetail && (
+                    <p style={{ marginTop: '6px', fontSize: '13px', whiteSpace: 'pre-line', color: '#444' }}>
+                      {detailText}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+          )
+        })}
       </div>
 
-      {/* 동의 척도 */}
+      {/* ✅ 동의 척도 */}
       {selectedOption !== null && (
         <div style={{ marginTop: '30px' }}>
-          <p style={{ fontWeight: 'bold', fontSize: '16px' }}>
-            {t.survey.agreePrompt}
-          </p>
+          <p style={{ fontWeight: 'bold', fontSize: '16px' }}>{t.survey.agreePrompt}</p>
 
           <div
             style={{
@@ -154,7 +192,7 @@ export default function QuestionCard({
         </div>
       )}
 
-      {/* 이전/다음 버튼 */}
+      {/* ✅ 이전/다음 버튼 */}
       <div style={{ marginTop: '40px', display: 'flex', justifyContent: 'space-between' }}>
         <button
           disabled={questionIndex === 0}

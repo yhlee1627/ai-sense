@@ -27,7 +27,8 @@ const ko = {
         '보통',
         '꽤 동의함',
         '강하게 동의함'
-      ]
+      ],
+      alertNoSelection: '먼저 이미지를 선택해주세요!'
     },
     result: {
       title: '당신의 윤리 성향 결과',

@@ -24,8 +24,8 @@ export const useLocalizedQuestions = (): Question[] => {
     option2: q.option2,
     option1_type: q.option1_type as Question['option1_type'], // ✅ 타입 단언
     option2_type: q.option2_type as Question['option2_type'], // ✅ 타입 단언
-    image1: `/images/${index + 1}-1.jpg`,
-    image2: `/images/${index + 1}-2.jpg`,
+    image1: `/images/${index + 1}-1.webp`,
+    image2: `/images/${index + 1}-2.webp`,
     detail1: q.detail1,
     detail2: q.detail2
   }))

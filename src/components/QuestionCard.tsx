@@ -49,7 +49,7 @@ export default function QuestionCard({
 
   const handleNextClick = () => {
     if (selectedOption === null) {
-      alert('먼저 이미지를 선택해주세요!')
+      alert(t.survey.alertNoSelection)
       return
     }
     onNext(selectedOption, agreementScore)

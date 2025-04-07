@@ -27,7 +27,8 @@ const en = {
         'Neutral',
         'Fairly agree',
         'Strongly agree'
-      ]
+      ],
+      alertNoSelection: 'Please select an option first!'
     },
     result: {
       title: 'Your Ethical Profile',

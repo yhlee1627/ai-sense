@@ -15,7 +15,7 @@ export default function Survey() {
   const navigate = useNavigate()
   //const { t } = useLanguage()
 
-  const { gender, age, sessionId } = location.state || {}
+  const { gender, age, country, sessionId } = location.state || {}
 
   const questions = useLocalizedQuestions()
 
@@ -41,7 +41,8 @@ export default function Survey() {
         selected_option: selected,
         agreement_score: score,
         gender,
-        age
+        age,
+        country
       },
       {
         onConflict: 'session_id,question_id'

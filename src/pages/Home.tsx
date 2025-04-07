@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import { useLanguage } from '../contexts/LanguageContext'
@@ -8,8 +8,17 @@ type GenderCode = 'male' | 'female'
 export default function Home() {
   const navigate = useNavigate()
   const [gender, setGender] = useState<GenderCode | ''>('')
-  const [age, setAge] = useState<string>('') // 👈 변경됨
+  const [age, setAge] = useState<string>('') // string으로 처리
+  const [country, setCountry] = useState<string>('') // 국가 자동 감지
   const { lang, setLang, t } = useLanguage()
+
+  // 국가 정보 자동 감지
+  useEffect(() => {
+    fetch('https://ipapi.co/json/')
+      .then((res) => res.json())
+      .then((data) => setCountry(data.country_name || 'Unknown'))
+      .catch(() => setCountry('Unknown'))
+  }, [])
 
   const handleStart = () => {
     const numericAge = Number(age)
@@ -25,6 +34,7 @@ export default function Home() {
       state: {
         gender,
         age: numericAge,
+        country,
         sessionId
       }
     })
@@ -120,7 +130,6 @@ export default function Home() {
           onChange={(e) => {
             const onlyNumbers = e.target.value.replace(/\D/g, '')
             const numericAge = Number(onlyNumbers)
-
             if (onlyNumbers === '' || (numericAge >= 0 && numericAge <= 100)) {
               setAge(onlyNumbers)
             }

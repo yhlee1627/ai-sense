@@ -8,11 +8,13 @@ type GenderCode = 'male' | 'female'
 export default function Home() {
   const navigate = useNavigate()
   const [gender, setGender] = useState<GenderCode | ''>('')
-  const [age, setAge] = useState<number | ''>('')
+  const [age, setAge] = useState<string>('') // 👈 변경됨
   const { lang, setLang, t } = useLanguage()
 
   const handleStart = () => {
-    if (!gender || age === '') {
+    const numericAge = Number(age)
+
+    if (!gender || age === '' || numericAge < 5 || numericAge > 100) {
       alert(t.home.alertIncomplete)
       return
     }
@@ -22,7 +24,7 @@ export default function Home() {
     navigate('/survey', {
       state: {
         gender,
-        age: Number(age),
+        age: numericAge,
         sessionId
       }
     })
@@ -52,7 +54,7 @@ export default function Home() {
         boxSizing: 'border-box',
         textAlign: 'center',
       }}>
-        {/* 언어 선택 드롭다운 */}
+        {/* 언어 선택 */}
         <div style={{ marginBottom: '20px', alignSelf: 'flex-end' }}>
           <label style={{ fontSize: '14px', marginRight: '8px' }}>{t.home.languageLabel}</label>
           <select
@@ -110,10 +112,19 @@ export default function Home() {
 
         {/* 나이 입력 */}
         <input
-          type="number"
+          type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
           placeholder={t.home.ageLabel}
           value={age}
-          onChange={(e) => setAge(Number(e.target.value))}
+          onChange={(e) => {
+            const onlyNumbers = e.target.value.replace(/\D/g, '')
+            const numericAge = Number(onlyNumbers)
+
+            if (onlyNumbers === '' || (numericAge >= 0 && numericAge <= 100)) {
+              setAge(onlyNumbers)
+            }
+          }}
           style={{
             width: '220px',
             padding: '12px 16px',

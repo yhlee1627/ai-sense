@@ -1,7 +1,7 @@
 const ko = {
     home: {
       title: 'AI-Sense',
-      description: 'AI가 결정해야 하는 윤리적인 딜레마 상황에서\n여러분은 어떤 선택을 하실지 궁금합니다.\n설문에 앞서 성별과 나이를 간단히 입력해주세요!',
+      description: 'AI가 결정해야 하는 윤리적인 딜레마 상황에서, 여러분은 어떤 선택을 하실지 궁금합니다.\n설문에 앞서 성별과 나이를 간단히 입력해주세요!',
       startButton: '설문 시작하기',
       genderLabel: '성별',
       ageLabel: '나이',

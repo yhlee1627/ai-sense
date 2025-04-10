@@ -1,7 +1,7 @@
 const en = {
   home: {
     title: 'AI-Sense',
-    description: 'In ethical dilemmas where AI must make a decision,\nwe’re curious to know what you would choose.\nBefore we begin, please tell us your gender and age!',
+    description: 'In ethical dilemmas where AI must make a decision, we’re curious to know what you would choose.\nBefore we begin, please tell us your gender and age!',
     startButton: 'Start Survey',
     genderLabel: 'Gender',
     ageLabel: 'Age',

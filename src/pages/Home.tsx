@@ -172,7 +172,7 @@ export default function Home() {
           fontSize: '12px',
           color: '#999'
         }}>
-          © Youngho Lee, yhlee@dnue.ac.kr
+          © Youngho Lee & Hamin Kim | Contact: yhlee@dnue.ac.kr
         </p>
       </div>
     </div>

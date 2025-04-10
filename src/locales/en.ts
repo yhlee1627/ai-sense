@@ -5,7 +5,7 @@ const en = {
     startButton: 'Start Survey',
     genderLabel: 'Gender',
     ageLabel: 'Age',
-    languageLabel: 'Select Language',
+    languageLabel: '🌐',
     alertIncomplete: 'Please enter your gender and age.',
     genderOptions: {
       male: 'Male',

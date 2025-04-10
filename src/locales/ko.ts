@@ -5,7 +5,7 @@ const ko = {
       startButton: '설문 시작하기',
       genderLabel: '성별',
       ageLabel: '나이',
-      languageLabel: '언어 선택',
+      languageLabel: '🌐',
       alertIncomplete: '성별과 나이를 입력해주세요.',
       genderOptions: {
         male: '남',

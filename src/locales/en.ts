@@ -1,7 +1,7 @@
 const en = {
   home: {
     title: 'AI-Sense',
-    description: 'In ethical dilemmas where AI must make a decision, we’re curious to know what you would choose.\nBefore we begin, please tell us your gender and age!',
+    description: 'AI-sense helps you navigate ethical dilemmas related to AI.Each page shows two images with different ethical choices. Pick the one that matches your view and rate how strongly you agree. After five choices, you can compare your ethical profile with others.\nBefore we begin, please tell us your gender and age!',
     startButton: 'Start Survey',
     genderLabel: 'Gender',
     ageLabel: 'Age',
@@ -39,7 +39,7 @@ const en = {
     readAltUtil: 'Want to see the utilitarian perspective?',
     readAltDeon: 'Want to see the deontological perspective?',
     explanation: {
-      util: '"The greatest happiness for the greatest number."\nThis idea suggests that the right choice is the one that brings joy and benefit to the most people.\nEven if a few must sacrifice, the goal is to maximize happiness for everyone.\nThis view is well known through the philosopher Jeremy Bentham.',
+      util: '"The greatest happiness for the greatest number."\nThis idea suggests that the right choice is the one that brings pleasure and benefit to the most people.\nEven if a few must sacrifice, the goal is to maximize happiness for everyone.\nThis view is well known through the philosopher Jeremy Bentham.',
       deon: '"Treat humanity always as an end, never merely as a means."\nThis means that people should never be used like tools, no matter how good the result might be.\nIf someone is unfairly sacrificed, that cannot be considered right.\nThis idea is well known through the philosopher Immanuel Kant.'
     },
     sectionTitle: 'Response Comparison by Question',
@@ -89,11 +89,11 @@ const en = {
       option2: 'Because it concerns lives, humans should make the final decision.',
       option1_type: 'Utilitarian',
       option2_type: 'Deontological',
-      detail1: 'An AI robot detects an enemy and immediately attacks.\nThe goal is to minimize friendly losses through fast decisions.',
-      detail2: 'The AI robot pauses and waits for a human commander to decide.\nThis shows that ethical responsibility should remain with humans.'
+      detail1: 'An AI robot detects an enemy and immediately attacks.\nIt demonstrates a quick decision-making strategy that reduces harm to our side.',
+      detail2: 'This scene shows an AI combat robot pausing for a human commander to decide.\nIt reflects a moral stance that technology must uphold the ethical principle of valuing human life above all.'
     },
     {
-      title: 'AI Sentencing Algorithm',
+      title: 'AI Judge',
       description: 'Is it right for AI to decide sentences based on legal data?',
       option1: 'To ensure fairness, AI should determine sentences.',
       option2: 'A human judge should consider all aspects and decide.',

@@ -94,19 +94,19 @@ const en = {
     },
     {
       title: 'AI Judge',
-      description: 'Is it right for AI to decide sentences based on legal data?',
-      option1: 'To ensure fairness, AI should determine sentences.',
+      description: 'Is it desirable for AI to automatically determine the level of punishment based on legal data?',
+      option1: 'To ensure fairness, AI judge is desirable.',
       option2: 'A human judge should consider all aspects and decide.',
       option1_type: 'Utilitarian',
       option2_type: 'Deontological',
-      detail1: 'An AI judge gives a sentence based on legal data.\nIt values consistency and efficiency in justice.',
-      detail2: 'A defendant is upset with the AI’s judgment, and the audience is confused.\nIt raises concerns that judgments without empathy or context can be unfair.'
+      detail1: 'An AI judge applies the same information and criteria equally to all individualsgbased on legal data.\nIt values consistency and efficiency in justice.',
+      detail2: 'A defendant is upset with the AI’s judgment, and the audience is confused.\nDue to data bias, AI could make unfair judgments against innocent individuals, making human judgment a fairer option.'
     },
     {
       title: 'AI Medical Diagnosis',
       description: 'Should AI be allowed to diagnose and prescribe treatments?',
       option1: 'Yes, for accurate and efficient care.',
-      option2: 'Accuracy alone is not enough; a doctor should evaluate the patient directly.',
+      option2: 'Accuracy alone is not enough, if the decision is not explainable; a doctor should evaluate the patient directly.',
       option1_type: 'Utilitarian',
       option2_type: 'Deontological',
       detail1: 'The AI doctor gives a fast and accurate diagnosis, helping many patients get treated efficiently.\nIt highlights the importance of speed and access in healthcare.',

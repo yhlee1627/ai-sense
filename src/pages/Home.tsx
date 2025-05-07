@@ -64,13 +64,20 @@ export default function Home() {
         boxSizing: 'border-box',
         textAlign: 'center',
       }}>
-        <div style={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '20px',
-        }}>
+        <div
+          style={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '20px',
+            padding: '0 16px',
+            boxSizing: 'border-box',
+            maxWidth: '900px',
+            minWidth: 0,
+            gap: '12px',
+          }}
+        >
           {/* 교육자료 버튼 (왼쪽) */}
           <button
             onClick={() => navigate('/edu')}
@@ -84,6 +91,7 @@ export default function Home() {
               cursor: 'pointer',
               fontWeight: 'bold',
               transition: 'background 0.2s, color 0.2s',
+              minWidth: '100px',
             }}
           >
             교육자료
@@ -99,7 +107,8 @@ export default function Home() {
                 borderRadius: '6px',
                 border: '1px solid #ccc',
                 fontSize: '14px',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                minWidth: '90px',
               }}
             >
               <option value="ko">한국어</option>
@@ -107,6 +116,16 @@ export default function Home() {
             </select>
           </div>
         </div>
+        {/* 모바일 반응형: flexDirection column 적용 (간단한 방식) */}
+        <style>{`
+          @media (max-width: 600px) {
+            .home-topbar {
+              flex-direction: column !important;
+              align-items: stretch !important;
+              gap: 10px !important;
+            }
+          }
+        `}</style>
 
         <h1 style={{ fontSize: '36px', marginBottom: '10px' }}>{t.home.title}</h1>
         <p style={{

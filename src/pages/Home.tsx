@@ -74,10 +74,9 @@ export default function Home() {
             boxSizing: 'border-box',
             maxWidth: '900px',
             minWidth: 0,
-            gap: '12px',
+            gap: '10px',
           }}
         >
-          {/* 교육자료 버튼 (왼쪽) */}
           <button
             onClick={() => navigate('/edu')}
             style={{
@@ -90,13 +89,13 @@ export default function Home() {
               cursor: 'pointer',
               fontWeight: 'bold',
               transition: 'background 0.2s, color 0.2s',
-              minWidth: '100px',
+              width: 'auto',
+              minWidth: 0,
             }}
           >
             교육자료
           </button>
-          {/* 언어 선택 (오른쪽) */}
-          <div style={{ alignSelf: 'flex-end' }}>
+          <div>
             <label style={{ fontSize: '14px', marginRight: '8px' }}>{t.home.languageLabel}</label>
             <select
               value={lang}
@@ -107,7 +106,7 @@ export default function Home() {
                 border: '1px solid #ccc',
                 fontSize: '14px',
                 cursor: 'pointer',
-                minWidth: '90px',
+                minWidth: 0,
               }}
             >
               <option value="ko">한국어</option>

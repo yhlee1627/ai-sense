@@ -60,27 +60,52 @@ export default function Home() {
         fontFamily: 'sans-serif',
         color: '#333',
         width: '100%',
-        maxWidth: '400px',
+        maxWidth: '900px',
         boxSizing: 'border-box',
         textAlign: 'center',
       }}>
-        {/* 언어 선택 */}
-        <div style={{ marginBottom: '20px', alignSelf: 'flex-end' }}>
-          <label style={{ fontSize: '14px', marginRight: '8px' }}>{t.home.languageLabel}</label>
-          <select
-            value={lang}
-            onChange={(e) => setLang(e.target.value as 'ko' | 'en')}
+        <div style={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: '20px',
+        }}>
+          {/* 교육자료 버튼 (왼쪽) */}
+          <button
+            onClick={() => navigate('/edu')}
             style={{
-              padding: '6px 12px',
+              padding: '6px 16px',
               borderRadius: '6px',
-              border: '1px solid #ccc',
+              border: '1px solid #4CAF50',
+              background: '#f8f8f8',
+              color: '#4CAF50',
               fontSize: '14px',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              fontWeight: 'bold',
+              transition: 'background 0.2s, color 0.2s',
             }}
           >
-            <option value="ko">한국어</option>
-            <option value="en">English</option>
-          </select>
+            교육자료
+          </button>
+          {/* 언어 선택 (오른쪽) */}
+          <div style={{ alignSelf: 'flex-end' }}>
+            <label style={{ fontSize: '14px', marginRight: '8px' }}>{t.home.languageLabel}</label>
+            <select
+              value={lang}
+              onChange={(e) => setLang(e.target.value as 'ko' | 'en')}
+              style={{
+                padding: '6px 12px',
+                borderRadius: '6px',
+                border: '1px solid #ccc',
+                fontSize: '14px',
+                cursor: 'pointer'
+              }}
+            >
+              <option value="ko">한국어</option>
+              <option value="en">English</option>
+            </select>
+          </div>
         </div>
 
         <h1 style={{ fontSize: '36px', marginBottom: '10px' }}>{t.home.title}</h1>

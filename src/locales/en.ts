@@ -1,7 +1,7 @@
 const en = {
   home: {
     title: 'AI-Sense',
-    description: 'AI-sense helps you navigate ethical dilemmas related to AI.Each page shows two images with different ethical choices. Pick the one that matches your view and rate how strongly you agree. After five choices, you can compare your ethical profile with others.\nBefore we begin, please tell us your gender and age!',
+    description: 'AI-sense helps you navigate ethical dilemmas related to AI. \nEach page shows two images with different ethical choices. \nPick the one that matches your view and rate how strongly you agree. \nAfter five choices, you can compare your ethical profile with others.\nBefore we begin, please tell us your gender and age!',
     startButton: 'Start Survey',
     genderLabel: 'Gender',
     ageLabel: 'Age',

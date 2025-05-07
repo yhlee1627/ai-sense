@@ -65,6 +65,7 @@ export default function Home() {
         textAlign: 'center',
       }}>
         <div
+          className="home-topbar"
           style={{
             width: '100%',
             display: 'flex',

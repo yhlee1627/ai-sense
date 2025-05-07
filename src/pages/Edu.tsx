@@ -31,7 +31,23 @@ const eduCards = [
 export default function Edu() {
   const navigate = useNavigate()
   return (
-    <div style={{ minHeight: '100vh', background: '#f7f9fa', padding: '60px 0' }}>
+    <div style={{ minHeight: '100vh', background: '#f7f9fa', padding: '60px 0', position: 'relative' }}>
+      <button
+        onClick={() => navigate('/')}
+        style={{
+          position: 'absolute',
+          left: 24,
+          top: 24,
+          background: 'none',
+          border: 'none',
+          color: '#4CAF50',
+          fontSize: '18px',
+          cursor: 'pointer',
+          fontWeight: 'bold',
+        }}
+      >
+        ← 뒤로가기
+      </button>
       <h2 style={{ textAlign: 'center', fontSize: '2.2rem', marginBottom: '40px', fontWeight: 700 }}>
         교육자료
       </h2>

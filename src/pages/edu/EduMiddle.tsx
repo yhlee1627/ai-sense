@@ -3,6 +3,15 @@ import { useNavigate } from 'react-router-dom'
 export default function EduMiddle() {
   const navigate = useNavigate()
 
+  const handleDownload = () => {
+    const link = document.createElement('a')
+    link.href = '/pdfs/middle_guide.pdf'
+    link.download = 'middle_guide.pdf'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   return (
     <div style={{
       minHeight: '100vh',
@@ -13,7 +22,24 @@ export default function EduMiddle() {
       backgroundColor: '#fff',
       overflowY: 'auto',
       padding: '40px 20px',
+      position: 'relative',
     }}>
+      <button
+        onClick={() => navigate('/edu')}
+        style={{
+          position: 'absolute',
+          left: 24,
+          top: 24,
+          background: 'none',
+          border: 'none',
+          color: '#4CAF50',
+          fontSize: '18px',
+          cursor: 'pointer',
+          fontWeight: 'bold',
+        }}
+      >
+        ← 뒤로가기
+      </button>
       <div style={{
         maxWidth: '900px',
         width: '100%',
@@ -26,19 +52,28 @@ export default function EduMiddle() {
         }}>
           <h1 style={{ fontSize: '32px', color: '#333' }}>중학생용 교육 자료</h1>
           <button
-            onClick={() => navigate('/edu')}
+            onClick={handleDownload}
             style={{
               padding: '8px 16px',
               borderRadius: '6px',
               border: '1px solid #4CAF50',
-              background: '#f8f8f8',
+              background: '#fff',
               color: '#4CAF50',
               fontSize: '14px',
               cursor: 'pointer',
               fontWeight: 'bold',
+              transition: 'all 0.2s',
+            }}
+            onMouseOver={e => {
+              e.currentTarget.style.background = '#f0f7f0'
+              e.currentTarget.style.color = '#388e3c'
+            }}
+            onMouseOut={e => {
+              e.currentTarget.style.background = '#fff'
+              e.currentTarget.style.color = '#4CAF50'
             }}
           >
-            뒤로가기
+            지도안 다운로드
           </button>
         </div>
 

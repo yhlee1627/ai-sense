@@ -22,7 +22,24 @@ export default function EduElementaryLow() {
       backgroundColor: '#fff',
       overflowY: 'auto',
       padding: '40px 20px',
+      position: 'relative',
     }}>
+      <button
+        onClick={() => navigate('/edu')}
+        style={{
+          position: 'absolute',
+          left: 24,
+          top: 24,
+          background: 'none',
+          border: 'none',
+          color: '#4CAF50',
+          fontSize: '18px',
+          cursor: 'pointer',
+          fontWeight: 'bold',
+        }}
+      >
+        ← 뒤로가기
+      </button>
       <div style={{
         maxWidth: '900px',
         width: '100%',
@@ -34,47 +51,30 @@ export default function EduElementaryLow() {
           marginBottom: '40px',
         }}>
           <h1 style={{ fontSize: '32px', color: '#333' }}>초등학교 3-4학년용 교육 자료</h1>
-          <div style={{ display: 'flex', gap: '12px' }}>
-            <button
-              onClick={handleDownload}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '6px',
-                border: '1px solid #4CAF50',
-                background: '#fff',
-                color: '#4CAF50',
-                fontSize: '14px',
-                cursor: 'pointer',
-                fontWeight: 'bold',
-                transition: 'all 0.2s',
-              }}
-              onMouseOver={e => {
-                e.currentTarget.style.background = '#f0f7f0'
-                e.currentTarget.style.color = '#388e3c'
-              }}
-              onMouseOut={e => {
-                e.currentTarget.style.background = '#fff'
-                e.currentTarget.style.color = '#4CAF50'
-              }}
-            >
-              지도안 다운로드
-            </button>
-            <button
-              onClick={() => navigate('/edu')}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '6px',
-                border: '1px solid #4CAF50',
-                background: '#f8f8f8',
-                color: '#4CAF50',
-                fontSize: '14px',
-                cursor: 'pointer',
-                fontWeight: 'bold',
-              }}
-            >
-              뒤로가기
-            </button>
-          </div>
+          <button
+            onClick={handleDownload}
+            style={{
+              padding: '8px 16px',
+              borderRadius: '6px',
+              border: '1px solid #4CAF50',
+              background: '#fff',
+              color: '#4CAF50',
+              fontSize: '14px',
+              cursor: 'pointer',
+              fontWeight: 'bold',
+              transition: 'all 0.2s',
+            }}
+            onMouseOver={e => {
+              e.currentTarget.style.background = '#f0f7f0'
+              e.currentTarget.style.color = '#388e3c'
+            }}
+            onMouseOut={e => {
+              e.currentTarget.style.background = '#fff'
+              e.currentTarget.style.color = '#4CAF50'
+            }}
+          >
+            지도안 다운로드
+          </button>
         </div>
 
         <div style={{

@@ -31,7 +31,13 @@ const eduCards = [
 export default function Edu() {
   const navigate = useNavigate()
   return (
-    <div style={{ minHeight: '100vh', background: '#f7f9fa', padding: '60px 0', position: 'relative' }}>
+    <div style={{ 
+      minHeight: '100vh', 
+      background: '#f7f9fa', 
+      padding: '60px 20px',
+      position: 'relative',
+      boxSizing: 'border-box',
+    }}>
       <button
         onClick={() => navigate('/')}
         style={{
@@ -44,35 +50,62 @@ export default function Edu() {
           fontSize: '18px',
           cursor: 'pointer',
           fontWeight: 'bold',
+          zIndex: 1,
         }}
       >
         ← 뒤로가기
       </button>
-      <h2 style={{ textAlign: 'center', fontSize: '2.2rem', marginBottom: '40px', fontWeight: 700 }}>
+      <h2 style={{ 
+        textAlign: 'center', 
+        fontSize: 'clamp(1.5rem, 5vw, 2.2rem)', 
+        marginBottom: '40px', 
+        fontWeight: 700,
+        paddingTop: '20px',
+      }}>
         교육자료
       </h2>
       <div style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
         gap: '32px',
-        maxWidth: '1100px',
+        maxWidth: '1200px',
         margin: '0 auto',
+        padding: '0 20px',
       }}>
         {eduCards.map(card => (
           <div key={card.title} style={{
             background: 'white',
             borderRadius: '18px',
             boxShadow: '0 4px 16px rgba(0,0,0,0.07)',
-            padding: '36px 32px',
-            width: '260px',
+            padding: 'clamp(24px, 4vw, 36px) clamp(20px, 3vw, 32px)',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            transition: 'box-shadow 0.2s',
+            transition: 'all 0.2s ease',
+            height: '100%',
+            minHeight: '200px',
+          }}
+          onMouseOver={e => {
+            e.currentTarget.style.transform = 'translateY(-4px)'
+            e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)'
+          }}
+          onMouseOut={e => {
+            e.currentTarget.style.transform = 'translateY(0)'
+            e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.07)'
           }}>
-            <h3 style={{ fontSize: '1.25rem', marginBottom: '16px', fontWeight: 600 }}>{card.title}</h3>
-            <p style={{ color: '#555', fontSize: '1rem', marginBottom: '28px', textAlign: 'center' }}>{card.desc}</p>
+            <h3 style={{ 
+              fontSize: 'clamp(1.1rem, 3vw, 1.25rem)', 
+              marginBottom: '16px', 
+              fontWeight: 600,
+              textAlign: 'center',
+            }}>{card.title}</h3>
+            <p style={{ 
+              color: '#555', 
+              fontSize: 'clamp(0.9rem, 2.5vw, 1rem)', 
+              marginBottom: '28px', 
+              textAlign: 'center',
+              flex: 1,
+            }}>{card.desc}</p>
             <button
               onClick={() => navigate(card.link)}
               style={{
@@ -81,11 +114,13 @@ export default function Edu() {
                 color: 'white',
                 border: 'none',
                 borderRadius: '8px',
-                fontSize: '15px',
+                fontSize: 'clamp(14px, 2.5vw, 15px)',
                 cursor: 'pointer',
                 fontWeight: 500,
                 boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                transition: 'background 0.2s',
+                transition: 'all 0.2s ease',
+                width: '100%',
+                maxWidth: '200px',
               }}
               onMouseOver={e => (e.currentTarget.style.background = '#388e3c')}
               onMouseOut={e => (e.currentTarget.style.background = '#4CAF50')}

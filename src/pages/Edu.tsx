@@ -3,27 +3,27 @@ import { useNavigate } from 'react-router-dom'
 const eduCards = [
   {
     title: '초등학교 3~4학년용',
-    desc: 'AI와 윤리의 기초를 쉽고 재미있게 배우는 자료입니다.',
+    desc: 'AI의 편리함과 문제점을 살펴봅니다.',
     link: '/edu/elementary-low',
   },
   {
     title: '초등학교 5~6학년용',
-    desc: '조금 더 깊이 있는 AI 윤리 이야기를 다룹니다.',
+    desc: 'AI의 개념과 작동 원리를 이해합니다.',
     link: '/edu/elementary-high',
   },
   {
     title: '중학생용',
-    desc: '중학생 눈높이에 맞춘 AI 윤리와 실제 사례.',
+    desc: 'AI 윤리적 딜레마와 가치를 명료화합니다.',
     link: '/edu/middle',
   },
   {
     title: '고등학생용',
-    desc: '고등학생을 위한 심화 AI 윤리 학습 자료.',
+    desc: '윤리학적 관점에서 AI 문제를 분석합니다.',
     link: '/edu/high',
   },
   {
     title: '평생학습자용',
-    desc: '성인 및 평생학습자를 위한 AI 윤리 자료.',
+    desc: 'AI 시대 시민의 역할을 논의합니다.',
     link: '/edu/lifelong',
   },
 ]

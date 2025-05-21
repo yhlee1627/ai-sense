@@ -3,7 +3,6 @@ import { useLanguage } from '../../contexts/LanguageContext'
 
 export default function EduElementaryLow() {
   const navigate = useNavigate()
-  const { t } = useLanguage()
 
   const handleDownload = () => {
     const link = document.createElement('a')

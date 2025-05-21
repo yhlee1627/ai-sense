@@ -3,7 +3,6 @@ import { useLanguage } from '../../contexts/LanguageContext'
 
 export default function EduLifelong() {
   const navigate = useNavigate()
-  const { t } = useLanguage()
 
   return (
     <div style={{

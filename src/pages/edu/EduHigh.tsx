@@ -3,7 +3,6 @@ import { useLanguage } from '../../contexts/LanguageContext'
 
 export default function EduHigh() {
   const navigate = useNavigate()
-  const { t } = useLanguage()
 
   return (
     <div style={{

@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom'
-import { useLanguage } from '../../contexts/LanguageContext'
 
 export default function EduLifelong() {
   const navigate = useNavigate()

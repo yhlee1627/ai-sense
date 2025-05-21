@@ -2,11 +2,9 @@ import React from 'react';
 import { Container, Typography, Paper, Grid, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useLanguage } from '../contexts/LanguageContext';
 
 const ElementaryHigh: React.FC = () => {
   const navigate = useNavigate();
-  const { t } = useLanguage();
 
   const handleBack = () => {
     navigate('/');
